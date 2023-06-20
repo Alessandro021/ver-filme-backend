@@ -1,0 +1,24 @@
+///https://www.prisma.io/docs/guides/upgrade-guides/upgrade-from-prisma-1/upgrade-from-mongodb-beta
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Filme {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  linguagem String
+  titulo String
+  descricao String
+  popularidade Int
+  type String
+  poster String
+  data  String
+  video String
+  trailer String
+  voto_medio Float
+}
