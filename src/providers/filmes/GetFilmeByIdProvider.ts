@@ -2,12 +2,15 @@ import { IFimes } from "../../database/models/Filmes";
 import { prisma } from "../../database/prisma";
 
 
-
-
-export const getAllFilmesProvider = async (): Promise<IFimes[] | Error> => {
-
+export const getFilmeByIdProvider =async (id: string): Promise<IFimes | Error> => {
+    
+   
     try {
-        const allFilmes = await prisma.filme.findMany({
+
+        const filme = await prisma.filme.findFirst({
+            where: {
+                id: id,
+            },
             select: {
                 // createAt: false,
                 // updateAt: false,
@@ -26,14 +29,11 @@ export const getAllFilmesProvider = async (): Promise<IFimes[] | Error> => {
             }
         });
 
-        if(allFilmes) return allFilmes;
+        if(filme) return filme;
 
-        await prisma.$disconnect();
-
-        return Error("Erro ao buscar lista de filmes");
+        return Error("Erro ao buscar registro");
+        
     } catch (error) {
-        console.log(error);
-        return Error("Erro ao buscar lista de filmes");
+        return Error("Erro ao buscar registro");
     }
-
 };

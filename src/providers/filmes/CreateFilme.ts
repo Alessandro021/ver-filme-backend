@@ -1,3 +1,4 @@
+import { number } from "yup";
 import { IFimes } from "../../database/models/Filmes";
 import { prisma } from "../../database/prisma";
 
@@ -16,15 +17,25 @@ export const createFilmeProvider = async (filme: IFilmeProps ): Promise<{} | Err
     // if(typeof filme.linguagem !== "string" || typeof filme.popularidade !== "number"){
     //     return Error("Erro ao registrar Filme")
     // }
+    
+    // vefifica se alguma strinq do array possui algum numerico, caso tenha ele retorna o numerico e com isso bloqueia o envio ao banco de dados
+    const isString = filme.genero.filter(g => g.match(/\d+/));
+
+    if( isString.length !== 0 || filme.genero.every((genero) => typeof genero === "string"||filme.genero.length < 0) === false){
+        return Error("Erro ao registrar Filme");
+    }
+
     try {
         const data: IIdProps = await prisma.filme.create({
-            data: filme,
+            data: filme ,
             select: { id: true}
         });
 
         if(data){
             return data;
         }
+
+        await prisma.$disconnect();
 
         return Error("Erro ao registrar Filme");
     } catch (error) {

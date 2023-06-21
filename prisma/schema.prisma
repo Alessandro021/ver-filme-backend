@@ -1,4 +1,8 @@
 ///https://www.prisma.io/docs/guides/upgrade-guides/upgrade-from-prisma-1/upgrade-from-mongodb-beta
+//https://www.prisma.io/docs/concepts/components/prisma-schema/relations
+//npx prisma init --datasource-provider=mongodb
+//npx prisma generate
+
 
 generator client {
   provider = "prisma-client-js"
@@ -13,12 +17,18 @@ model Filme {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   linguagem String
   titulo String
+  genero String[]
   descricao String
   popularidade Int
-  type String
+  type String @default("filme")
   poster String
   data  String
   video String
   trailer String
   voto_medio Float
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+
+  @@index([titulo])
+  @@map("filme")
 }

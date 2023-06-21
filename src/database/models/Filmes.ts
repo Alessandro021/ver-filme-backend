@@ -6,7 +6,8 @@ export interface IFimes {
     titulo: string;
     descricao: string;
     popularidade?: number;
-    type: string;
+    // type: string;
+    genero: Array<string>
     poster: string;
     data: string;
     video?: string;
