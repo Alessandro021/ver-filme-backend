@@ -33,11 +33,9 @@ export const createFilmeProvider = async (filme: IFilmeProps ): Promise<{} | Err
 
         if(data){
             return data;
+        } else {
+            return Error("Erro ao registrar Filme");
         }
-
-        await prisma.$disconnect();
-
-        return Error("Erro ao registrar Filme");
     } catch (error) {
         console.log(error);
         return Error("Erro ao registrar Filme");

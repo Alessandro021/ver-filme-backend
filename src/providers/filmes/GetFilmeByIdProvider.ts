@@ -11,7 +11,7 @@ export const getFilmeByIdProvider =async (id: string): Promise<IFimes | Error> =
             where: {
                 id: id,
             },
-            select: {
+            select: { 
                 // createAt: false,
                 // updateAt: false,
                 id: true,
@@ -29,9 +29,11 @@ export const getFilmeByIdProvider =async (id: string): Promise<IFimes | Error> =
             }
         });
 
-        if(filme) return filme;
-
-        return Error("Erro ao buscar registro");
+        if(filme){
+            return filme;
+        } else {
+            return Error("Erro ao buscar registro");
+        }
         
     } catch (error) {
         return Error("Erro ao buscar registro");

@@ -4,10 +4,20 @@ import { prisma } from "../../database/prisma";
 
 
 
-export const getAllFilmesProvider = async (): Promise<IFimes[] | Error> => {
-
+export const getAllFilmesProvider = async (pagina: number, limite: number, filtrar: string): Promise<IFimes[] | Error> => {
+    console.log(limite);
     try {
         const allFilmes = await prisma.filme.findMany({
+
+            where: {
+                titulo: {
+                    contains: filtrar,
+                    mode: "insensitive"
+                }
+            },
+            skip: (pagina -1)  * limite,
+            take: limite,
+            
             select: {
                 // createAt: false,
                 // updateAt: false,
@@ -26,11 +36,11 @@ export const getAllFilmesProvider = async (): Promise<IFimes[] | Error> => {
             }
         });
 
-        if(allFilmes) return allFilmes;
-
-        await prisma.$disconnect();
-
-        return Error("Erro ao buscar lista de filmes");
+        if(allFilmes){
+            return allFilmes;
+        } else {
+            return Error("Erro ao buscar lista de filmes");
+        }
     } catch (error) {
         console.log(error);
         return Error("Erro ao buscar lista de filmes");
