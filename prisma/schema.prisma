@@ -32,3 +32,36 @@ model Filme {
   @@index([titulo])
   @@map("filme")
 }
+
+model Serie {
+ id String @id @default(auto()) @map("_id") @db.ObjectId
+  linguagem String
+  titulo String
+  titulo_temporada Temporada[] @relation("TituloTemporada")
+  genero String[]
+  descricao String
+  popularidade Int
+  type String @default("serie")
+  poster String
+  data  String
+  video String
+  trailer String
+  voto_medio Float
+
+
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+
+  @@index([titulo])
+  @@map("serie")
+}
+
+model Temporada {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  titulo String 
+  serie Serie @relation("TituloTemporada", fields: [serieId], references: [id])
+  serieId String @db.ObjectId
+
+  @@index([titulo])
+  @@map("temporada")
+}

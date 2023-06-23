@@ -4,6 +4,7 @@ import { getAllFilmes, validarReqGetAll } from "./controllers/filmes/GetAllFilme
 import { validarReqGetFilmeById, getFilmeById} from "./controllers/filmes/GetFilmeById";
 import { deteteFilmeById, validarReqDeleteFilmeById } from "./controllers/filmes/DeleteFilmeById";
 import { validarReqUpdateFilmeByIdBody, validarReqUpdateFilmeByIdParams, updateFilmeById} from "./controllers/filmes/UpdateFilmeById";
+import { createSerie, validarReqCreateSerie } from "./controllers/series/CreateSerie";
 
 export const router = Router();
 
@@ -17,6 +18,9 @@ router.get("/filmes", validarReqGetAll, getAllFilmes);
 router.get("/filme/:id", validarReqGetFilmeById, getFilmeById );
 router.delete("/filme/:id", validarReqDeleteFilmeById, deteteFilmeById );
 router.put("/filme/:id", validarReqUpdateFilmeByIdBody, validarReqUpdateFilmeByIdParams, updateFilmeById );
+
+/*ROTA DE SERIE*/
+router.post("/create/serie", validarReqCreateSerie, createSerie);
 
 
 
