@@ -1,13 +1,8 @@
-import { number } from "yup";
 import { IFimes } from "../../database/models/Filmes";
 import { prisma } from "../../database/prisma";
 
-interface IFilmeProps extends Omit<IFimes, "id">{
-    linguagem: string
-    popularidade: number
-    video: string
-    trailer: string
-}
+interface IFilmeProps extends Omit<IFimes, "id">{}
+
 interface IIdProps{
     id: string;
 }

@@ -12,7 +12,7 @@ export const deleteSerieByIdProvider = async (id: string): Promise<void | Error>
         });
 
         if(!result){
-            return Error(`Erro serie com id: ${id} nao foi encontrado`);
+            return Error(`Erro serie com id: ${id} não foi encontrado`);
         }
 
         await prisma.temporada.deleteMany({

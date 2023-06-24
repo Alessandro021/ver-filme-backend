@@ -2,12 +2,12 @@
 
 export interface IFimes {
     id: string;
-    linguagem?: string;
+    linguagem: string;
+    imagem_fundo?: string;
     titulo: string;
     descricao: string;
     popularidade?: number;
-    // type: string;
-    genero: Array<string>
+    genero: string[]
     poster: string;
     data: string;
     video?: string;

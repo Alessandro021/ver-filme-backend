@@ -8,6 +8,7 @@ import { createSerie, validarReqCreateSerie } from "./controllers/series/CreateS
 import { getAllSerie, validarReqGetAllSerie } from "./controllers/series/GetAllSeries";
 import { deleteSerieById, validarReqDeleteSerieById } from "./controllers/series/DeleteSerieById";
 import { getSerieById, validarReqGetSerieById } from "./controllers/series/GetSerieById";
+import { validarReqUpdateSerieByIdBody, validarReqUpdateSerieByIdParams, updateSerieById } from "./controllers/series/UpdateSerieById";
 
 export const router = Router();
 
@@ -27,6 +28,7 @@ router.post("/create/serie", validarReqCreateSerie, createSerie);
 router.get("/serie", validarReqGetAllSerie, getAllSerie);
 router.get("/serie/:id", validarReqGetSerieById, getSerieById );
 router.delete("/serie/:id", validarReqDeleteSerieById, deleteSerieById );
+router.put("/serie/:id", validarReqUpdateSerieByIdBody, validarReqUpdateSerieByIdParams, updateSerieById);
 
 
 

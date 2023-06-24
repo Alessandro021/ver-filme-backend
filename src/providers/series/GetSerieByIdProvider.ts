@@ -1,7 +1,9 @@
 import { ISerieRetun } from "../../database/models/Series";
 import { prisma } from "../../database/prisma";
 
-export const getSerieByIdProvider = async (id: string): Promise<ISerieRetun | Error> => {
+interface ISerieProps extends Omit<ISerieRetun, "titulo_temporada" | "num_episodios">{}
+
+export const getSerieByIdProvider = async (id: string): Promise<ISerieProps | Error> => {
     try {
 
         const serie = await prisma.serie.findFirst({
@@ -14,6 +16,7 @@ export const getSerieByIdProvider = async (id: string): Promise<ISerieRetun | Er
                 descricao: true,
                 popularidade: true,
                 poster: true,
+                imagem_fundo: true,
                 data: true,
                 video: true,
                 trailer: true,

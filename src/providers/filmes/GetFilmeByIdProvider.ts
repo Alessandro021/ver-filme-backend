@@ -21,6 +21,7 @@ export const getFilmeByIdProvider =async (id: string): Promise<IFimes | Error> =
                 descricao: true,
                 popularidade: true,
                 type: true,
+                imagem_fundo: true,
                 poster: true,
                 data: true,
                 video: true,

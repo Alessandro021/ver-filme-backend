@@ -2,20 +2,9 @@ import * as yup from "yup";
 import { validacao } from "../../middleware/Validacao";
 import { Request, Response } from "express";
 import { updateFilmeByIdProvider } from "../../providers/filmes/UpdateFilmeByIdProvider";
+import { IFimes } from "../../database/models/Filmes";
 
-
-interface IFilmeProps {
-    linguagem: string;
-    titulo: string;
-    descricao: string;
-    popularidade: number;
-    genero: Array<string | undefined>;
-    poster: string;
-    data: string;
-    video: string;
-    trailer: string;
-    voto_medio: number;
- }
+interface IFilmeProps extends Omit<IFimes, "id">{}
 
 interface IIdFilmesProps {
     id: string;
@@ -24,10 +13,11 @@ interface IIdFilmesProps {
 const validarFilmeBody: yup.ObjectSchema<Partial<IFilmeProps>> = yup.object().shape({
     linguagem: yup.string().min(5).nonNullable().optional(),
     titulo: yup.string().nonNullable().min(5).optional(),
-    genero: yup.array().of(yup.string().min(5).nonNullable()).nonNullable().optional(),
-    descricao: yup.string().nonNullable().optional().optional(),
+    genero: yup.array().of(yup.string().min(5).nonNullable().required()).nonNullable().optional(),
+    descricao: yup.string().nonNullable().optional(),
     popularidade: yup.number().default(0).nonNullable().optional(),
     poster: yup.string().url().nonNullable().optional(),
+    imagem_fundo: yup.string().optional().url().nonNullable(),
     data: yup.string().nonNullable().optional(),
     video: yup.string().url().nonNullable().optional(),
     trailer: yup.string().url().nonNullable().optional(),

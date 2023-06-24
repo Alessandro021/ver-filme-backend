@@ -15,6 +15,7 @@ const validarSeriesProps: yup.ObjectSchema<ISerieProps> = yup.object().shape({
     descricao: yup.string().required(),
     popularidade: yup.number().default(0).nonNullable(),
     poster: yup.string().required().url().nonNullable(),
+    imagem_fundo: yup.string().optional().url().nonNullable(),
     data: yup.string().required().nonNullable(),
     video: yup.string().url(),
     trailer: yup.string().optional().url(),

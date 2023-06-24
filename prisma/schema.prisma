@@ -19,12 +19,13 @@ model Filme {
   titulo String
   genero String[]
   descricao String
-  popularidade Int
+  popularidade Int @default(0)
   type String @default("filme")
   poster String
+  imagem_fundo String @default("null")
   data  String
-  video String
-  trailer String
+  video String @default("null")
+  trailer String @default("null")
   voto_medio Float
   createAt DateTime @default(now())
   updateAt DateTime @default(now())
@@ -33,8 +34,9 @@ model Filme {
   @@map("filme")
 }
 
+
 model Serie {
- id String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   linguagem String
   titulo String
   temporada Temporada[] @relation("TituloTemporada")
@@ -43,6 +45,7 @@ model Serie {
   popularidade Int @default(0)
   type String @default("serie")
   poster String
+   imagem_fundo String @default("null")
   data  String
   video String @default("null")
   trailer String  @default("null")

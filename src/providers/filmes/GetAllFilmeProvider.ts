@@ -1,11 +1,7 @@
 import { IFimes } from "../../database/models/Filmes";
 import { prisma } from "../../database/prisma";
 
-
-
-
 export const getAllFilmesProvider = async (pagina: number, limite: number, filtrar: string): Promise<IFimes[] | Error> => {
-    console.log(limite);
     try {
         const allFilmes = await prisma.filme.findMany({
 
@@ -29,6 +25,7 @@ export const getAllFilmesProvider = async (pagina: number, limite: number, filtr
                 popularidade: true,
                 type: true,
                 poster: true,
+                imagem_fundo: true,
                 data: true,
                 video: true,
                 trailer: true,

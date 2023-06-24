@@ -1,28 +1,7 @@
-import { string } from "yup";
+import { ISerieRetun } from "../../database/models/Series";
 import { prisma } from "../../database/prisma";
 
-interface  ISerieProps {
-    id: string;
-    linguagem: string;
-    titulo: string;
-    descricao: string;
-    popularidade?: number;
-    genero: string
-    poster: string;
-    data: string;
-    video?: string;
-    trailer?: string;
-    voto_medio: number;
-    temporada: ITemporada[]
- 
-}
-
-interface  ITemporada {
-    id: string;
-    titulo: string;
-    num_episodios: number;
-}
-
+interface ISerieProps extends Omit<ISerieRetun, "titulo_temporada" | "num_episodios"> {}
 
 export const getAllSerieProvider = async (pagina: number, limite: number, filtrar: string): Promise<ISerieProps[] | Error> => {
     
@@ -48,6 +27,7 @@ export const getAllSerieProvider = async (pagina: number, limite: number, filtra
                 popularidade: true,
                 poster: true,
                 data: true,
+                imagem_fundo: true,
                 video: true,
                 trailer: true,
                 voto_medio: true,

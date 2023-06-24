@@ -1,6 +1,4 @@
-import { IFimes } from "../../database/models/Filmes";
 import { prisma } from "../../database/prisma";
-
 
 export const deleteFilmeByIdProvider = async (id: string): Promise<void | Error> => {
 
