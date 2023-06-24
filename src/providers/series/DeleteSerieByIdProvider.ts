@@ -1,0 +1,32 @@
+import { prisma } from "../../database/prisma";
+
+export const deleteSerieByIdProvider = async (id: string): Promise<void | Error> => {
+
+    try {
+
+        const result = await prisma.serie.findUnique({
+            where: { id: id },
+            include: {
+                temporada: true,
+            }
+        });
+
+        if(!result){
+            return Error(`Erro serie com id: ${id} nao foi encontrado`);
+        }
+
+        await prisma.temporada.deleteMany({
+            where: { serieId: result.id}
+        });
+
+        await prisma.serie.delete({
+            where: {id: id}
+        });
+
+        return;
+        
+    } catch (error) {
+        console.log(`ERROR: ${error}`);
+        return Error(`Erro ao deletar serie com id: ${id}`);
+    }
+};

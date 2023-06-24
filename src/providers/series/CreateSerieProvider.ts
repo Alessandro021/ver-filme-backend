@@ -2,29 +2,21 @@ import { ISerie } from "../../database/models/Series";
 import { prisma } from "../../database/prisma";
 
 
-type ISeriesProps = Omit<ISerie, "id"|"titulo_temporada">
+type ISeriesProps = Omit<ISerie, "id" | "titulo_temporada" | "num_episodios">
 
 interface IIdProps{
     id: string;
 }
 
-export const createSerieProvider = async (titulo: string, serie: ISeriesProps ): Promise<{} | Error> => {
+export const createSerieProvider = async (titulo: string, num_episodios: number, serie: ISeriesProps ): Promise<{} | Error> => {
     try {
         const resultSerie: IIdProps = await prisma.serie.create({
             data:  {
-                linguagem: String(serie.linguagem),
-                titulo: serie.titulo,
-                descricao: serie.descricao,
-                popularidade: Number(serie.popularidade),
-                genero: serie.genero,
-                poster: serie.poster,
-                data: serie.data,
-                video: String(serie.video),
-                trailer: String(serie.trailer),
-                voto_medio: serie.voto_medio,
-                titulo_temporada: {
-                    create: {
-                        titulo: titulo
+                ...serie,
+                temporada: {
+                    create: {   
+                        titulo: titulo,
+                        num_episodios: num_episodios
                     }
                 },
             },

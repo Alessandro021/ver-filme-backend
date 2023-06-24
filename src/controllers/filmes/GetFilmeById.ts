@@ -7,10 +7,6 @@ interface IIdFilmeProps {
     id: string;
 }
 
-interface IIdFilmeProps {
-    id: string;
-}
-
 const validarFilmeParms: yup.ObjectSchema<IIdFilmeProps> = yup.object().shape({
     id: yup.string().required().nonNullable().min(24).max(24)
 });
