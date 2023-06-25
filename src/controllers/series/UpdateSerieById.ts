@@ -4,7 +4,7 @@ import { validacao } from "../../middleware/Validacao";
 import { Request, Response } from "express";
 import { updateSerieByIdProvider } from "../../providers/series/UpdateSerieByIdProvider";
 
-interface ISerieProps extends Omit<ISerie, "id" | "num_episodios" | "titulo_temporada">{
+interface ISerieProps extends Omit<ISerie, "id" | "num_episodios" | "titulo_temporada" | "episodios">{
 }
 
 interface IIdProps{
@@ -20,7 +20,6 @@ const validarSerieBody: yup.ObjectSchema<Partial<ISerieProps> > = yup.object().s
     poster: yup.string().optional().url().nonNullable(),
     imagem_fundo: yup.string().optional().url().nonNullable(),
     data: yup.string().optional().nonNullable(),
-    video: yup.string().url(),
     trailer: yup.string().optional().url(),
     voto_medio: yup.number().default(0).nonNullable().optional(),
 });

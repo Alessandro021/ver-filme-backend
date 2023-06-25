@@ -6,14 +6,19 @@ export const deleteSerieByIdProvider = async (id: string): Promise<void | Error>
 
         const result = await prisma.serie.findUnique({
             where: { id: id },
-            include: {
-                temporada: true,
-            }
         });
 
         if(!result){
             return Error(`Erro serie com id: ${id} não foi encontrado`);
         }
+
+        await prisma.episodio.deleteMany({
+            where: {
+                temporada: {
+                    serieId: result.id
+                }
+            }
+        });
 
         await prisma.temporada.deleteMany({
             where: { serieId: result.id}

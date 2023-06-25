@@ -45,9 +45,8 @@ model Serie {
   popularidade Int @default(0)
   type String @default("serie")
   poster String
-   imagem_fundo String @default("null")
+  imagem_fundo String @default("null")
   data  String
-  video String @default("null")
   trailer String  @default("null")
   voto_medio Float
 
@@ -62,6 +61,7 @@ model Temporada {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   titulo String 
   num_episodios Int
+  episodios  Episodio[] @relation("Episodios")
   serie Serie @relation("TituloTemporada", fields: [serieId], references: [id])
   serieId String @db.ObjectId
 
@@ -69,18 +69,17 @@ model Temporada {
   @@map("temporada")
 }
 
-// model Episodio {
-//   id String @id @default(auto()) @map("_id") @db.ObjectId
-//   titulo String 
-//   num_episodios Int
-//   descricao String
-//   data  String
-//   poster String
-//   voto_medio Float
-//   video String @default("null")
-//   // temporada Temporada @relation(fields: [temporadaId], references: [id])
-//   // temporadaId String @db.ObjectId
+model Episodio {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  titulo String  @default("null")
+  descricao String @default("null")
+  data  String @default("null")
+  poster String @default("null")
+  voto_medio Float  @default(0)
+  video String @default("null")
+  temporada Temporada @relation("Episodios", fields: [temporadaId], references: [id])
+  temporadaId String @db.ObjectId
 
-//   @@index([titulo])
-//   @@map("episodio")
-// }
+  @@index([titulo])
+  @@map("episodio")
+}

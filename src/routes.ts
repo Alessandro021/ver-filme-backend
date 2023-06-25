@@ -9,6 +9,7 @@ import { getAllSerie, validarReqGetAllSerie } from "./controllers/series/GetAllS
 import { deleteSerieById, validarReqDeleteSerieById } from "./controllers/series/DeleteSerieById";
 import { getSerieById, validarReqGetSerieById } from "./controllers/series/GetSerieById";
 import { validarReqUpdateSerieByIdBody, validarReqUpdateSerieByIdParams, updateSerieById } from "./controllers/series/UpdateSerieById";
+import { validarReqCreateTemporada, createTemporada } from "./controllers/temporada/CreateTemporada";
 
 export const router = Router();
 
@@ -29,6 +30,9 @@ router.get("/serie", validarReqGetAllSerie, getAllSerie);
 router.get("/serie/:id", validarReqGetSerieById, getSerieById );
 router.delete("/serie/:id", validarReqDeleteSerieById, deleteSerieById );
 router.put("/serie/:id", validarReqUpdateSerieByIdBody, validarReqUpdateSerieByIdParams, updateSerieById);
+
+/*ROTA DE TEMPORADA*/
+router.post("/create/temporada", validarReqCreateTemporada, createTemporada);
 
 
 

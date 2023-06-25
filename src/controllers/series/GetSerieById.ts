@@ -15,7 +15,7 @@ export const validarReqGetSerieById = validacao("params", validarSerieParms );
 
 export const getSerieById = async (req: Request, res: Response) => {
     
-    const result = await getSerieByIdProvider(req.body);
+    const result = await getSerieByIdProvider(req.params.id);
 
     if(result instanceof Error){
         return res.status(500).json({

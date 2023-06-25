@@ -1,7 +1,8 @@
-export interface  ITemporada {
+interface  ITemporada {
     id: string;
-    "titulo_temporada": string;
+    titulo_temporada: string;
     num_episodios: number;
+    episodios: IEpisodios[]
 }
 
 export interface  ISerie extends ITemporada {
@@ -14,9 +15,18 @@ export interface  ISerie extends ITemporada {
     poster: string;
     imagem_fundo?: string;
     data: string;
-    video?: string;
     trailer?: string;
     voto_medio: number;
+}
+
+export interface IEpisodios{
+    id?: string;
+    titulo?: string;
+    descricao?: string;
+    data?: string;
+    poster?: string;
+    voto_medio?: number;
+    video?: string;
 }
 
 /**
@@ -24,23 +34,13 @@ export interface  ISerie extends ITemporada {
  */
 
 export interface  ISerieRetun extends ISerie{
-    // id: string;
-    // linguagem: string;
-    // titulo: string;
-    // descricao: string;
-    // popularidade?: number;
-    // genero: string
-    // poster: string;
-    // data: string;
-    // video?: string;
-    // trailer?: string;
-    // voto_medio: number;
     temporada: ITemporadaReturn[]
- 
 }
 
-interface  ITemporadaReturn {
+export interface  ITemporadaReturn {
     id: string;
     titulo: string;
     num_episodios: number;
+    episodios: IEpisodiosReturn[]
 }
+interface IEpisodiosReturn extends IEpisodios{}
