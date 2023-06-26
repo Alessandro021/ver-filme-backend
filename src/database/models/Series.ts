@@ -1,4 +1,4 @@
-interface  ITemporada {
+export interface  ITemporada {
     id: string;
     titulo_temporada: string;
     num_episodios: number;
@@ -43,4 +43,6 @@ export interface  ITemporadaReturn {
     num_episodios: number;
     episodios: IEpisodiosReturn[]
 }
-interface IEpisodiosReturn extends IEpisodios{}
+interface IEpisodiosReturn extends IEpisodios{
+    temporadaId?: string;
+}

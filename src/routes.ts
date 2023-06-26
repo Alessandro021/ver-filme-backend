@@ -10,6 +10,11 @@ import { deleteSerieById, validarReqDeleteSerieById } from "./controllers/series
 import { getSerieById, validarReqGetSerieById } from "./controllers/series/GetSerieById";
 import { validarReqUpdateSerieByIdBody, validarReqUpdateSerieByIdParams, updateSerieById } from "./controllers/series/UpdateSerieById";
 import { validarReqCreateTemporada, createTemporada } from "./controllers/temporada/CreateTemporada";
+import { validarReqGetAllTemporadaSerieById, getAllTemporadas} from "./controllers/temporada/GetAllTemporadas";
+import { validarReqDeleteAllTemporada, deleteAllTemporadas } from "./controllers/temporada/DeleteAllTemporada";
+import { validarReqDeleteTemporada, deletTemporada } from "./controllers/temporada/DeleteTemporadaById";
+import { validarReqGetTemporadaById, getTemporadaById } from "./controllers/temporada/GetTemporadaById";
+import { validarReqUpdateTemporadaByIdParams, validarReqUpdateTemporadaByIdBody, updateTemporadaById} from "./controllers/temporada/UpdateTemporadaById";
 
 export const router = Router();
 
@@ -33,7 +38,11 @@ router.put("/serie/:id", validarReqUpdateSerieByIdBody, validarReqUpdateSerieByI
 
 /*ROTA DE TEMPORADA*/
 router.post("/create/temporada", validarReqCreateTemporada, createTemporada);
-
+router.get("/temporada/all/:id", validarReqGetAllTemporadaSerieById, getAllTemporadas);
+router.get("/temporada/:id", validarReqGetTemporadaById, getTemporadaById);
+router.put("/temporada/:id", validarReqUpdateTemporadaByIdParams, validarReqUpdateTemporadaByIdBody, updateTemporadaById);
+router.delete("/temporada/all/:id", validarReqDeleteAllTemporada, deleteAllTemporadas);
+router.delete("/temporada/:id", validarReqDeleteTemporada, deletTemporada);
 
 
 
