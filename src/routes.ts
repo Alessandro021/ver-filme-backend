@@ -15,6 +15,10 @@ import { validarReqDeleteAllTemporada, deleteAllTemporadas } from "./controllers
 import { validarReqDeleteTemporada, deletTemporada } from "./controllers/temporada/DeleteTemporadaById";
 import { validarReqGetTemporadaById, getTemporadaById } from "./controllers/temporada/GetTemporadaById";
 import { validarReqUpdateTemporadaByIdParams, validarReqUpdateTemporadaByIdBody, updateTemporadaById} from "./controllers/temporada/UpdateTemporadaById";
+import { validarReqCreateEpisodiobody, validarReqCreateEpisodioparams, cerateEpisodio } from "./controllers/episodios/CreateEpisodio";
+import { validarReqGetEpisodioAllById, getAllEpisodiosById } from "./controllers/episodios/GetAllEpisodiosById";
+import { validarReqGetEpisodioById, getEpisodioById } from "./controllers/episodios/GetEpisodioById";
+import { validarReqUpdateEpisodioByIdParams, validarReqUpdateEpisodioByIdBody, updateEpisodioById } from "./controllers/episodios/UpdateEpisodioById";
 
 export const router = Router();
 
@@ -45,6 +49,11 @@ router.delete("/temporada/all/:id", validarReqDeleteAllTemporada, deleteAllTempo
 router.delete("/temporada/:id", validarReqDeleteTemporada, deletTemporada);
 
 
+/*ROTA DE EPISODIOS*/
+router.post("/create/episodio/:id", validarReqCreateEpisodiobody, validarReqCreateEpisodioparams, cerateEpisodio);
+router.get("/episodio/all/:id", validarReqGetEpisodioAllById, getAllEpisodiosById);
+router.get("/episodio/:id", validarReqGetEpisodioById, getEpisodioById);
+router.put("/episodio/:id", validarReqUpdateEpisodioByIdParams, validarReqUpdateEpisodioByIdBody, updateEpisodioById);
 
 
 
