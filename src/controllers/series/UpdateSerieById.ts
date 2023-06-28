@@ -19,9 +19,15 @@ const validarSerieBody: yup.ObjectSchema<Partial<ISerieProps> > = yup.object().s
     popularidade: yup.number().default(0).nonNullable(),
     poster: yup.string().optional().url().nonNullable(),
     imagem_fundo: yup.string().optional().url().nonNullable(),
-    data: yup.string().optional().nonNullable(),
     trailer: yup.string().optional().url(),
     voto_medio: yup.number().default(0).nonNullable().optional(),
+    data: yup
+        .string()
+        .optional()
+        .test("data", "data formato de data incorreto, formato 'DD/MM/YYYY'", value => {
+            const regex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19\d{2}|20\d{2})$/;
+            return regex.test(value as any);
+        })
 });
 
 const validarSerieIdParams: yup.ObjectSchema<IIdProps> = yup.object().shape({

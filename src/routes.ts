@@ -1,24 +1,30 @@
 import { Router } from "express";
 import { validarReqCreateFilme, criarFilme} from "./controllers/filmes/CreateFilme";
-import { getAllFilmes, validarReqGetAll } from "./controllers/filmes/GetAllFilmes";
+import { validarReqGetAll, getAllFilmes } from "./controllers/filmes/GetAllFilmes";
 import { validarReqGetFilmeById, getFilmeById} from "./controllers/filmes/GetFilmeById";
-import { deteteFilmeById, validarReqDeleteFilmeById } from "./controllers/filmes/DeleteFilmeById";
+import { validarReqDeleteFilmeById, deteteFilmeById } from "./controllers/filmes/DeleteFilmeById";
 import { validarReqUpdateFilmeByIdBody, validarReqUpdateFilmeByIdParams, updateFilmeById} from "./controllers/filmes/UpdateFilmeById";
-import { createSerie, validarReqCreateSerie } from "./controllers/series/CreateSerie";
-import { getAllSerie, validarReqGetAllSerie } from "./controllers/series/GetAllSeries";
-import { deleteSerieById, validarReqDeleteSerieById } from "./controllers/series/DeleteSerieById";
-import { getSerieById, validarReqGetSerieById } from "./controllers/series/GetSerieById";
+
+import { validarReqCreateSerie, createSerie } from "./controllers/series/CreateSerie";
+import { validarReqGetAllSerie, getAllSerie } from "./controllers/series/GetAllSeries";
+import { validarReqDeleteSerieById, deleteSerieById } from "./controllers/series/DeleteSerieById";
+import { validarReqGetSerieById, getSerieById } from "./controllers/series/GetSerieById";
 import { validarReqUpdateSerieByIdBody, validarReqUpdateSerieByIdParams, updateSerieById } from "./controllers/series/UpdateSerieById";
+
 import { validarReqCreateTemporada, createTemporada } from "./controllers/temporada/CreateTemporada";
 import { validarReqGetAllTemporadaSerieById, getAllTemporadas} from "./controllers/temporada/GetAllTemporadas";
 import { validarReqDeleteAllTemporada, deleteAllTemporadas } from "./controllers/temporada/DeleteAllTemporada";
 import { validarReqDeleteTemporada, deletTemporada } from "./controllers/temporada/DeleteTemporadaById";
 import { validarReqGetTemporadaById, getTemporadaById } from "./controllers/temporada/GetTemporadaById";
 import { validarReqUpdateTemporadaByIdParams, validarReqUpdateTemporadaByIdBody, updateTemporadaById} from "./controllers/temporada/UpdateTemporadaById";
+
 import { validarReqCreateEpisodiobody, validarReqCreateEpisodioparams, cerateEpisodio } from "./controllers/episodios/CreateEpisodio";
 import { validarReqGetEpisodioAllById, getAllEpisodiosById } from "./controllers/episodios/GetAllEpisodiosById";
 import { validarReqGetEpisodioById, getEpisodioById } from "./controllers/episodios/GetEpisodioById";
 import { validarReqUpdateEpisodioByIdParams, validarReqUpdateEpisodioByIdBody, updateEpisodioById } from "./controllers/episodios/UpdateEpisodioById";
+import { validarReqDeleteAllEpisodiosById, deleteAllEpisodiosById } from "./controllers/episodios/DeleteAllEpisodiosById";
+import { validarReqDeleteEpisodioById, deleteEpisodioById } from "./controllers/episodios/DeleteEpisodioById";
+import { validarReqDeleteEpisodiosById, deleteEpisodiosById } from "./controllers/episodios/DeleteEpisodiosById";
 
 export const router = Router();
 
@@ -54,6 +60,8 @@ router.post("/create/episodio/:id", validarReqCreateEpisodiobody, validarReqCrea
 router.get("/episodio/all/:id", validarReqGetEpisodioAllById, getAllEpisodiosById);
 router.get("/episodio/:id", validarReqGetEpisodioById, getEpisodioById);
 router.put("/episodio/:id", validarReqUpdateEpisodioByIdParams, validarReqUpdateEpisodioByIdBody, updateEpisodioById);
-
+router.delete("/episodio/all/:id", validarReqDeleteAllEpisodiosById, deleteAllEpisodiosById);
+router.delete("/episodio/:id", validarReqDeleteEpisodioById, deleteEpisodioById);
+router.delete("/episodio", validarReqDeleteEpisodiosById, deleteEpisodiosById);
 
 

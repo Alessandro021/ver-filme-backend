@@ -15,10 +15,16 @@ const validarFilmesProps: yup.ObjectSchema<IFimesProps> = yup.object().shape({
     popularidade: yup.number().default(0).nonNullable(),
     poster: yup.string().required().url().nonNullable(),
     imagem_fundo: yup.string().optional().url().nonNullable(),
-    data: yup.string().required().nonNullable(),
     video: yup.string().url().nonNullable(),
     trailer: yup.string().notRequired().url().nonNullable(),
     voto_medio: yup.number().default(0).nonNullable(),
+    data: yup
+        .string()
+        .required("Data do episódio é obrigatória")
+        .test("data", "data formato de data incorreto, formato 'DD/MM/YYYY'", value => {
+            const regex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19\d{2}|20\d{2})$/;
+            return regex.test(value);
+        })
 });
 
 export const validarReqCreateFilme = validacao("body" , validarFilmesProps);

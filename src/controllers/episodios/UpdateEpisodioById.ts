@@ -16,11 +16,17 @@ const validarIdepisodioParms: yup.ObjectSchema<IIdEpisodio> = yup.object().shape
 
 const validarEpisodios: yup.ObjectSchema<Partial<IEpisodioProps>> = yup.object().shape({
     titulo: yup.string().optional().min(5),
-    data: yup.string().optional(),
     descricao: yup.string().optional(),
     poster: yup.string().optional().url(),
     voto_medio: yup.number().default(0).optional(),
     video: yup.string().optional().url(),
+    data: yup
+        .string()
+        .required("Data do episódio é obrigatória")
+        .test("data", "data formato de data incorreto, formato 'DD/MM/YYYY'", value => {
+            const regex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19\d{2}|20\d{2})$/;
+            return regex.test(value);
+        })
 });
 
 export const validarReqUpdateEpisodioByIdParams = validacao("params", validarIdepisodioParms);

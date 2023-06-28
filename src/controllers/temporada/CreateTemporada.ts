@@ -13,11 +13,17 @@ interface IEpisodiosProps extends Omit<IEpisodios, "id">{}
 
 const validarEpisodios: yup.ObjectSchema<Partial<IEpisodiosProps>> = yup.object().shape({
     titulo: yup.string().required().min(5),
-    data: yup.string().required(),
     descricao: yup.string().optional(),
     poster: yup.string().required().url(),
     voto_medio: yup.number().default(0).optional(),
     video: yup.string().required().url(),
+    data: yup
+        .string()
+        .required("Data do episódio é obrigatória")
+        .test("data", "data formato de data incorreto, formato 'DD/MM/YYYY'", value => {
+            const regex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19\d{2}|20\d{2})$/;
+            return regex.test(value);
+        })
 });
 
 const validarTemporadaProps: yup.ObjectSchema<ITemporadaProps> =  yup.object().shape({

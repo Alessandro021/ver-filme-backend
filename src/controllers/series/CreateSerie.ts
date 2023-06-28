@@ -10,11 +10,17 @@ interface IEpisodiosProps extends Omit<IEpisodios, "id">{}
 
 const validarEpisodios: yup.ObjectSchema<Partial<IEpisodiosProps>> = yup.object().shape({
     titulo: yup.string().optional().min(5),
-    data: yup.string().optional(),
     descricao: yup.string().optional(),
     poster: yup.string().optional().url(),
     voto_medio: yup.number().default(0).optional(),
     video: yup.string().optional().url(),
+    data: yup
+        .string()
+        .optional()
+        .test("data", "data formato de data incorreto, formato 'DD/MM/YYYY'", value => {
+            const regex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19\d{2}|20\d{2})$/;
+            return regex.test(value as any);
+        })
 });
 
 const validarSeriesProps: yup.ObjectSchema<ISerieProps> = yup.object().shape({
@@ -27,10 +33,16 @@ const validarSeriesProps: yup.ObjectSchema<ISerieProps> = yup.object().shape({
     popularidade: yup.number().default(0).nonNullable(),
     poster: yup.string().required().url().nonNullable(),
     imagem_fundo: yup.string().optional().url().nonNullable(),
-    data: yup.string().required().nonNullable(),
     trailer: yup.string().optional().url(),
     voto_medio: yup.number().default(0).nonNullable(),
-    episodios: yup.array(validarEpisodios).default([]).nonNullable().optional()
+    episodios: yup.array(validarEpisodios).default([]).nonNullable().optional(),
+    data: yup
+        .string()
+        .required("Data do episódio é obrigatória")
+        .test("data", "data formato de data incorreto, formato 'DD/MM/YYYY'", value => {
+            const regex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19\d{2}|20\d{2})$/;
+            return regex.test(value);
+        })
 });
 
 export const validarReqCreateSerie = validacao("body", validarSeriesProps);
