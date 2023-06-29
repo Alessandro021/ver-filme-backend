@@ -1,4 +1,7 @@
 import { Router } from "express";
+
+import { autenticarRota } from "./middleware/AutenticarRota";
+
 import { validarReqCreateFilme, criarFilme} from "./controllers/filmes/CreateFilme";
 import { validarReqGetAll, getAllFilmes } from "./controllers/filmes/GetAllFilmes";
 import { validarReqGetFilmeById, getFilmeById} from "./controllers/filmes/GetFilmeById";
@@ -18,16 +21,16 @@ import { validarReqDeleteTemporada, deletTemporada } from "./controllers/tempora
 import { validarReqGetTemporadaById, getTemporadaById } from "./controllers/temporada/GetTemporadaById";
 import { validarReqUpdateTemporadaByIdParams, validarReqUpdateTemporadaByIdBody, updateTemporadaById} from "./controllers/temporada/UpdateTemporadaById";
 
-import { validarReqCreateEpisodiobody, validarReqCreateEpisodioparams, cerateEpisodio } from "./controllers/episodios/CreateEpisodio";
+import { validarReqCreateEpisodioBody, cerateEpisodio } from "./controllers/episodios/CreateEpisodio";
 import { validarReqGetEpisodioAllById, getAllEpisodiosById } from "./controllers/episodios/GetAllEpisodiosById";
 import { validarReqGetEpisodioById, getEpisodioById } from "./controllers/episodios/GetEpisodioById";
 import { validarReqUpdateEpisodioByIdParams, validarReqUpdateEpisodioByIdBody, updateEpisodioById } from "./controllers/episodios/UpdateEpisodioById";
 import { validarReqDeleteAllEpisodiosById, deleteAllEpisodiosById } from "./controllers/episodios/DeleteAllEpisodiosById";
 import { validarReqDeleteEpisodioById, deleteEpisodioById } from "./controllers/episodios/DeleteEpisodioById";
 import { validarReqDeleteEpisodiosByIds, deleteEpisodiosByIds } from "./controllers/episodios/DeleteEpisodiosByIds";
+
 import { validarReqCreateUsuario, createUsuario} from "./controllers/usuarios/CreateUsuario";
 import { validarReqLogarUsuario, entrar } from "./controllers/usuarios/Entrar";
-import { autenticarRota } from "./middleware/AutenticarRota";
 import { validarReqGetUsuarioById, getUsuarioById } from "./controllers/usuarios/GetUsuarioById";
 
 
@@ -61,7 +64,7 @@ router.delete("/temporada/:id", autenticarRota, validarReqDeleteTemporada, delet
 
 
 /*ROTA DE EPISODIOS*/
-router.post("/create/episodio/:id", autenticarRota, validarReqCreateEpisodiobody, validarReqCreateEpisodioparams, cerateEpisodio);
+router.post("/create/episodio", autenticarRota, validarReqCreateEpisodioBody, cerateEpisodio);
 router.get("/episodio/all/:id", validarReqGetEpisodioAllById, getAllEpisodiosById);
 router.get("/episodio/:id", validarReqGetEpisodioById, getEpisodioById);
 router.put("/episodio/:id", autenticarRota, validarReqUpdateEpisodioByIdParams, validarReqUpdateEpisodioByIdBody, updateEpisodioById);
