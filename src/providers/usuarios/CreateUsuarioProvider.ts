@@ -1,0 +1,35 @@
+import { IUsuario } from "../../database/models/Usuarios";
+import { prisma } from "../../database/prisma";
+import { hashSenha } from "../../services/IncripitarSenha";
+
+interface IUsuarioProps extends Omit<IUsuario, "id">{}
+
+export const createUsuarioProvider = async (usuario: IUsuarioProps): Promise<{} | Error> => {
+    try {
+
+        const senhaHash = await hashSenha(usuario.senha);
+
+        const existeEmail = await prisma.usuario.findUnique({
+            where: {email: usuario.email}
+        });
+
+        if(existeEmail?.email){
+            return Error("Erro ao cadastra usuario");
+        }
+        
+        const result = await prisma.usuario.create({
+            data: {...usuario, senha: senhaHash},
+            select: {id: true},
+        });
+
+        if(result){
+            return result;
+        } else {
+            return Error("Erro ao registrar usuario");
+        }
+        
+    } catch (error) {
+        console.log(`ERROR: ${error}`);
+        return Error("Error ao criar usuario");
+    }
+};

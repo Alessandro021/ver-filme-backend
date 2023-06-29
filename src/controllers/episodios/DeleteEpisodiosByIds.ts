@@ -2,8 +2,7 @@
 import * as yup from "yup";
 import { validacao } from "../../middleware/Validacao";
 import { Request, Response} from "express";
-import { deleteEpisodiosByIdProvider } from "../../providers/episodios/DeleteEpisodiosByIdProvider";
-import moment from "moment";
+import { deleteEpisodiosByIdsProvider } from "../../providers/episodios/DeleteEpisodiosByIdsProvider";
 
 interface IIdsEpisodio{
     episodiosId: string[];
@@ -13,11 +12,11 @@ const validarIdsEpisodioBody: yup.ObjectSchema<IIdsEpisodio> = yup.object().shap
     episodiosId: yup.array(yup.string().required().nonNullable().min(24).max(24)).required(),  
 });
 
-export const validarReqDeleteEpisodiosById = validacao("body", validarIdsEpisodioBody);
+export const validarReqDeleteEpisodiosByIds = validacao("body", validarIdsEpisodioBody);
 
-export const deleteEpisodiosById = async (req: Request, res: Response) => {
+export const deleteEpisodiosByIds = async (req: Request, res: Response) => {
     
-    const result = await deleteEpisodiosByIdProvider(req.body.episodiosId);
+    const result = await deleteEpisodiosByIdsProvider(req.body.episodiosId);
 
     if(result instanceof Error){
         return res.status(500).json({

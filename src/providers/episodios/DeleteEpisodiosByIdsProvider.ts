@@ -2,7 +2,7 @@ import { prisma } from "../../database/prisma";
 
 
 
-export const deleteEpisodiosByIdProvider = async (episodiosId: string[]) : Promise<{} | Error> => {
+export const deleteEpisodiosByIdsProvider = async (episodiosId: string[]) : Promise<{} | Error> => {
     try {
         
         const episodios = await prisma.episodio.deleteMany({

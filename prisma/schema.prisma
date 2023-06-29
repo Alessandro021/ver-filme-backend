@@ -83,3 +83,14 @@ model Episodio {
   @@index([titulo])
   @@map("episodio")
 }
+
+
+model Usuario {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  nome String
+  email String @unique
+  senha String
+
+  @@index( [email, nome])
+  @@map("usuario")
+}
