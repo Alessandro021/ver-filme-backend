@@ -70,7 +70,7 @@ router.get("/episodio/:id", validarReqGetEpisodioById, getEpisodioById);
 router.put("/episodio/:id", autenticarRota, validarReqUpdateEpisodioByIdParams, validarReqUpdateEpisodioByIdBody, updateEpisodioById);
 router.delete("/episodio/all/:id", autenticarRota, validarReqDeleteAllEpisodiosById, deleteAllEpisodiosById);
 router.delete("/episodio/:id", autenticarRota, validarReqDeleteEpisodioById, deleteEpisodioById);
-router.delete("/episodio", autenticarRota, validarReqDeleteEpisodiosByIds, deleteEpisodiosByIds);
+router.delete("/episodio/", autenticarRota, validarReqDeleteEpisodiosByIds, deleteEpisodiosByIds);
 
 
 /*ROTA DE USUARIOS*/
