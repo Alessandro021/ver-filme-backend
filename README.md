@@ -339,11 +339,14 @@ O servidor estará disponível em `http://localhost:3333`.
 //É NECESSARIO INFORMAR O ID DO EPISODIO QUE DESEJA DELETAR NO CORPO DA URL
 ````
 
-+ Deletar Episodios Expecificos por IDs: DELETE `http://localhost/episodio`
++ Deletar Episodios Expecificos de uma Temporada, por IDs : DELETE `http://localhost/episodio`
 - Essa rota é **autenticada** e somente quem estiver logado e possui um token JWT valido podera acessar
 ````json
 //Parametros a serem passados 
-//É NECESSARIO INFORMAR OS IDs DOS EPISODIOS QUE DESEJA DELETAR, NO CORPO DA URL
+{
+	"temporadaId": "649e229050478a80405b028d",
+	"episodiosId":[ "649e229050478a80405b028f", "649e229050478a80405b028e"]
+}
 ````
 
 
