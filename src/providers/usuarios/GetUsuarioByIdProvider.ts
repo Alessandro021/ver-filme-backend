@@ -15,17 +15,20 @@ export const getUsuarioByIdProvider = async (userId: string): Promise<IUsuarioPr
                 id: true,
                 nome: true,
                 email: true,
+                eAdmin: true
             }
         });
 
         if(result){
             return result;
         } else {
-            return Error(`Ususario com id: ${userId}, nao foi encontrado`);
+            return Error(`Ususario com id: ${userId}, não foi encontrado`);
         }
         
     } catch (error) {
         console.log(`ERRRO: ${error}`);
         return Error("Erro ao buscar usuario");
+    } finally {
+        await prisma.$disconnect();
     }
 }; 

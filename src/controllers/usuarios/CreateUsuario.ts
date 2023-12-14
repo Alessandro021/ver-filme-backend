@@ -4,7 +4,7 @@ import { validacao } from "../../middleware/Validacao";
 import { Request, Response} from "express";
 import { createUsuarioProvider } from "../../providers/usuarios/CreateUsuarioProvider";
 
-interface IUsuarioProps extends Omit<IUsuario, "id">{}
+interface IUsuarioProps extends Omit<IUsuario,"eAdmin">{}
 
 const validarUsuarioProps: yup.ObjectSchema<IUsuarioProps> = yup.object().shape({
     nome: yup.string().required().nonNullable().min(3),
@@ -18,12 +18,8 @@ export const createUsuario = async (req: Request, res: Response) => {
     const result = await createUsuarioProvider(req.body);
 
     if(result instanceof Error){
-        return res.status(500).json({
-            errors: {
-                default: result.message
-            }
-        });
+        return res.status(500).json({error: true, message: result.message});
     }
 
-    return res.status(201).json(result);
+    return res.status(201).json({error: false, result: result});
 };

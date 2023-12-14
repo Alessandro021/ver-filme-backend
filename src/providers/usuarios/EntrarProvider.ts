@@ -29,5 +29,7 @@ export const entrarProvider = async (usuario: IUsuarioProps): Promise<{} | Error
     } catch (error) {
         console.log(`ERROR: ${error}`);
         return Error("Erro ao tentar fazer login!");
+    } finally {
+        await prisma.$disconnect();
     }
 };
