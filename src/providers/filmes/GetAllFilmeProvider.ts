@@ -15,8 +15,8 @@ export const getAllFilmesProvider = async (pagina: number, limite: number, filtr
                     },
                     {
                         categoria: {
-                            contains: filtrar,
-                            mode: "insensitive"
+                            has: filtrar,
+                            
                         }
                     }
                 ]

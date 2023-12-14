@@ -7,7 +7,7 @@ export interface IFimes {
     descricao: string;
     popularidade?: number;
     genero: string[];
-    categoria: string;
+    categoria: string[];
     poster: string;
     data: string;
     file: string;

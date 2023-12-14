@@ -18,7 +18,7 @@ model Filme {
   id String @id @default(cuid())
   titulo String
   genero String[]
-  categoria String
+  categoria String[]
   descricao String
   popularidade Int @default(0)
   type String @default("filme")
