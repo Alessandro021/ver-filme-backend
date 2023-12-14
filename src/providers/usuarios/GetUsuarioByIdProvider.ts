@@ -26,7 +26,7 @@ export const getUsuarioByIdProvider = async (userId: string): Promise<IUsuarioPr
         }
         
     } catch (error) {
-        console.log(`ERRRO: ${error}`);
+        // console.log(`ERRRO: ${error}`);
         return Error("Erro ao buscar usuario");
     } finally {
         await prisma.$disconnect();

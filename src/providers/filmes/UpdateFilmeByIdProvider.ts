@@ -41,7 +41,7 @@ export const updateFilmeByIdProvider = async (id: string, filme: IFimes): Promis
         }
 
     } catch (error) {
-        console.log(`ERRO AO ATULIZAR FILME: ${error}`);
+        // console.log(`ERRO AO ATULIZAR FILME: ${error}`);
         return Error(`Erro ao atulizar o filme com ID: ${id}`);
     } finally {
         await prisma.$disconnect();

@@ -50,7 +50,7 @@ export const getAllFilmesProvider = async (pagina: number, limite: number, filtr
             return Error("Houve um erro ao buscar lista de filmes");
         }
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return Error("Erro ao buscar lista de filmes");
     } finally {
         await prisma.$disconnect();

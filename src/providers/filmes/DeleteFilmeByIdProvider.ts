@@ -16,7 +16,7 @@ export const deleteFilmeByIdProvider = async (id: string): Promise<string | Erro
             return Error(`Houve um erro ao deletera filme com ID: ${id}`);
         }
     } catch (error) {
-        console.log(`ERRO AO DELELETAR FIME: ${error}`);
+        // console.log(`ERRO AO DELELETAR FIME: ${error}`);
         return Error(`Erro ao deletera filme com ID: ${id}`);
     } finally {
         await prisma.$disconnect();

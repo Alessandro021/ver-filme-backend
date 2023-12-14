@@ -33,7 +33,7 @@ export const createUsuarioProvider = async (usuario: IUsuario): Promise<IUsuario
         }
         
     } catch (error) {
-        console.log(`ERROR: ${error}`);
+        // console.log(`ERROR: ${error}`);
         return Error("Error ao criar usuario");
     } finally {
         await prisma.$disconnect();
