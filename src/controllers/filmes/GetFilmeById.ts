@@ -8,7 +8,7 @@ interface IIdFilmeProps {
 }
 
 const validarFilmeParms: yup.ObjectSchema<IIdFilmeProps> = yup.object().shape({
-    id: yup.string().required().nonNullable().min(24).max(24)
+    id: yup.string().required().nonNullable().min(25).max(25)
 });
 
 export const validarReqGetFilmeById = validacao("params", validarFilmeParms);

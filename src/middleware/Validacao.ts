@@ -11,22 +11,22 @@ export const validacao = (nome: TProperty, schema:TAllSchemas ) => async ( req: 
     case  "body":
         await schema.validate(req.body, {abortEarly: false})
             .then(() => next())
-            .catch(err => res.status(422).json({errors: err.errors}));
+            .catch(err => res.status(422).json({errors: err.inner.map((err: { path: any; message: any; }) => ({[err.path]: err.message}))}));
         break;
     case  "headers":
         await schema.validate(req.headers, {abortEarly: false})
             .then(() => next())
-            .catch(err => res.status(422).json({errors: err.errors})); 
+            .catch(err => res.status(422).json({errors: err.inner.map((err: { path: any; message: any; }) => ({[err.path]: err.message}))})); 
         break;
     case  "params":
         await schema.validate(req.params, {abortEarly: false})
             .then(() => next())
-            .catch(err => res.status(422).json({errors: err.errors})); 
+            .catch(err => res.status(422).json({errors: err.inner.map((err: { path: any; message: any; }) => ({[err.path]: err.message}))})); 
         break;
     case  "query":
         await schema.validate(req.query, {abortEarly: false})
             .then(() => next())
-            .catch(err => res.status(422).json({errors: err.errors})); 
+            .catch(err => res.status(422).json({errors: err.inner.map((err: { path: any; message: any; }) => ({[err.path]: err.message}))})); 
         break;
     default:
         res.status(422).json({errors: "Erro ao validar dados enviados"});

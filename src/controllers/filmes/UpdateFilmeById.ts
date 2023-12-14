@@ -24,15 +24,16 @@ const validarFilmeBody: yup.ObjectSchema<Partial<IFilmeProps>> = yup.object().sh
     duracao: yup.number().default(0).nonNullable().optional(),
     data: yup
         .string()
-        .required("Data do episódio é obrigatória")
-        .test("data", "data formato de data incorreto, formato 'DD/MM/YYYY'", value => {
+        .optional()
+        .test("data", "formato de data incorreto, formato 'DD/MM/YYYY'", value => {
+            if (value === undefined) return true;
             const regex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19\d{2}|20\d{2})$/;
             return regex.test(value);
         })
 });
 
 const validarFilmeParams: yup.ObjectSchema<IIdFilmesProps> = yup.object().shape({
-    id: yup.string().required().nonNullable().min(24).max(24)
+    id: yup.string().required().nonNullable().min(25).max(25)
 });
 
 export const validarReqUpdateFilmeByIdBody = validacao("body", validarFilmeBody);
