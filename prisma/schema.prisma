@@ -26,9 +26,9 @@ model Filme {
   imagem_fundo String
   data  String
   file String
-  trailer String?
-  voto_medio Float?
-  duracao Int?
+  treiler String?
+  voto_medio Float @default(0)
+  duracao Int @default(0)
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
 
@@ -49,7 +49,7 @@ model Serie {
   poster String
   imagem_fundo String
   data  String
-  trailer String?
+  treiler String?
   voto_medio Float
 
   createAt DateTime @default(now())

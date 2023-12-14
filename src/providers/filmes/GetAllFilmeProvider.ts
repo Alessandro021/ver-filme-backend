@@ -6,10 +6,20 @@ export const getAllFilmesProvider = async (pagina: number, limite: number, filtr
         const allFilmes = await prisma.filme.findMany({
 
             where: {
-                titulo: {
-                    contains: filtrar,
-                    mode: "insensitive"
-                }
+                OR: [
+                    {
+                        titulo: {
+                            contains: filtrar,
+                            mode: "insensitive"
+                        }
+                    },
+                    {
+                        categoria: {
+                            contains: filtrar,
+                            mode: "insensitive"
+                        }
+                    }
+                ]
             },
             skip: (pagina -1)  * limite,
             take: limite,
@@ -18,17 +28,18 @@ export const getAllFilmesProvider = async (pagina: number, limite: number, filtr
                 // createAt: false,
                 // updateAt: false,
                 id: true,
-                linguagem: true,
                 titulo: true,
                 genero: true,
                 descricao: true,
                 popularidade: true,
+                categoria: true,
+                duracao: true,
                 type: true,
                 poster: true,
                 imagem_fundo: true,
                 data: true,
-                video: true,
-                trailer: true,
+                file: true,
+                treiler: true,
                 voto_medio: true
             }
         });
@@ -36,11 +47,13 @@ export const getAllFilmesProvider = async (pagina: number, limite: number, filtr
         if(allFilmes){
             return allFilmes;
         } else {
-            return Error("Erro ao buscar lista de filmes");
+            return Error("Houve um erro ao buscar lista de filmes");
         }
     } catch (error) {
         console.log(error);
         return Error("Erro ao buscar lista de filmes");
+    } finally {
+        await prisma.$disconnect();
     }
 
 };

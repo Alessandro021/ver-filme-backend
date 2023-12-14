@@ -8,16 +8,17 @@ interface IFimesProps extends Omit<IFimes, "id">{}
   
   
 const validarFilmesProps: yup.ObjectSchema<IFimesProps> = yup.object().shape({
-    linguagem: yup.string().min(5).required().nonNullable(),
+    duracao: yup.number().default(0).nonNullable().optional(),
+    categoria: yup.string().nonNullable().min(5).required(),
     titulo: yup.string().required().nonNullable().min(5),
     genero: yup.array().of(yup.string().min(5).required().nonNullable()).required(),
     descricao: yup.string().required(),
-    popularidade: yup.number().default(0).nonNullable(),
-    poster: yup.string().required().url().nonNullable(),
-    imagem_fundo: yup.string().optional().url().nonNullable(),
-    video: yup.string().url().nonNullable(),
-    trailer: yup.string().notRequired().url().nonNullable(),
-    voto_medio: yup.number().default(0).nonNullable(),
+    popularidade: yup.number().default(0).nonNullable().optional(),
+    poster: yup.string().required().nonNullable(),
+    imagem_fundo: yup.string().required().nonNullable(),
+    file: yup.string().nonNullable().required(),
+    treiler: yup.string().notRequired().url().nullable(),
+    voto_medio: yup.number().default(0).nonNullable().optional(),
     data: yup
         .string()
         .required("Data do episódio é obrigatória")
@@ -34,13 +35,9 @@ export const criarFilme = async ( req: Request, res: Response) => {
     const result = await createFilmeProvider(req.body);
 
     if(result instanceof Error){
-        return res.status(500).json({
-            errors: {
-                default: result.message
-            }
-        });
+        return res.status(500).json({error: true, message: result.message});
     }
 
-    return res.status(201).json(result);
+    return res.status(201).json({error: false, result: result});
 
 };

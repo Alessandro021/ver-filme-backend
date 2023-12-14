@@ -7,7 +7,7 @@
     "start:dev": "tsx watch ./src/index.ts",
     "start": "node ./build/index.js",
     "build": "tsc",
-    "postinstall": "tsc && prisma generate",
+    "postinstall": "tsc && prisma migrate dev --name create-tables-cenna-filmes init && prisma generate",
     "generate": "prisma generate",
     "migrate": "npx prisma migrate dev --name create-tables-cenna-filmes init"
   },

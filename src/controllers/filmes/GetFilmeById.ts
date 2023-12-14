@@ -18,13 +18,9 @@ export const getFilmeById = async (req: Request, res: Response) => {
     const result = await getFilmeByIdProvider(req.params.id);
 
     if(result instanceof Error){
-        return res.status(500).json({
-            errors: {
-                default: result.message
-            }
-        });
+        return res.status(500).json({error: true, message: result.message});
     }
 
-    return res.status(200).json(result);
+    return res.status(200).json({error: false, result: result});
 
 };

@@ -15,7 +15,7 @@ export const getFilmeByIdProvider =async (id: string): Promise<IFimes | Error> =
                 // createAt: false,
                 // updateAt: false,
                 id: true,
-                linguagem: true,
+                categoria: true,
                 titulo: true,
                 genero: true,
                 descricao: true,
@@ -24,19 +24,22 @@ export const getFilmeByIdProvider =async (id: string): Promise<IFimes | Error> =
                 imagem_fundo: true,
                 poster: true,
                 data: true,
-                video: true,
-                trailer: true,
-                voto_medio: true
+                file: true,
+                treiler: true,
+                voto_medio: true,
+                duracao: true,
             }
         });
 
         if(filme){
             return filme;
         } else {
-            return Error("Erro ao buscar registro");
+            return Error("Houve um erro ao buscar filme");
         }
         
     } catch (error) {
-        return Error("Erro ao buscar registro");
+        return Error("Erro ao buscar filme");
+    } finally {
+        await prisma.$disconnect();
     }
 };

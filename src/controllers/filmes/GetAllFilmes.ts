@@ -20,15 +20,11 @@ export const validarReqGetAll = validacao("query", validarFilmeParms);
 
 export const getAllFilmes = async ( req: Request<{},{},{},IQueryProps>, res: Response)=> {
     
-    const allFilmes = await getAllFilmesProvider(  Number(req.query.pagina || 1), Number(req.query.limite || 10), req.query.filtrar || "");
+    const result = await getAllFilmesProvider(  Number(req.query.pagina || 1), Number(req.query.limite || 10), req.query.filtrar || "");
 
-    if(allFilmes instanceof Error){
-        return res.status(500).json({
-            error : {
-                default: allFilmes.message
-            }
-        });
+    if(result instanceof Error){
+        return res.status(500).json({error: true, message: result.message });
     }
 
-    return res.status(200).json(allFilmes);
+    return res.status(200).json({error: false, result: result});
 };

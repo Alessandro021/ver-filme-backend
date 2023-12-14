@@ -19,12 +19,8 @@ export const deteteFilmeById = async (req: Request, res: Response)=> {
     const result = await deleteFilmeByIdProvider(req.params.id);
 
     if(result instanceof Error){
-        return res.status(500).json({
-            error : {
-                default: result.message
-            }
-        });
+        return res.status(500).json({error: true, message: result.message});
     }
 
-    return res.status(204).send();
+    return res.status(200).send({error: false, result: result});
 };

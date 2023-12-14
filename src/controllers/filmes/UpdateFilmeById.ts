@@ -11,16 +11,17 @@ interface IIdFilmesProps {
 }
 
 const validarFilmeBody: yup.ObjectSchema<Partial<IFilmeProps>> = yup.object().shape({
-    linguagem: yup.string().min(5).nonNullable().optional(),
+    categoria: yup.string().nonNullable().min(5).optional(),
     titulo: yup.string().nonNullable().min(5).optional(),
     genero: yup.array().of(yup.string().min(5).nonNullable().required()).nonNullable().optional(),
     descricao: yup.string().nonNullable().optional(),
     popularidade: yup.number().default(0).nonNullable().optional(),
-    poster: yup.string().url().nonNullable().optional(),
-    imagem_fundo: yup.string().optional().url().nonNullable(),
-    video: yup.string().url().nonNullable().optional(),
-    trailer: yup.string().url().nonNullable().optional(),
+    poster: yup.string().nonNullable().optional(),
+    imagem_fundo: yup.string().optional().nonNullable(),
+    file: yup.string().nonNullable().optional(),
+    treiler: yup.string().url().nullable().optional(),
     voto_medio: yup.number().default(0).nonNullable().optional(),
+    duracao: yup.number().default(0).nonNullable().optional(),
     data: yup
         .string()
         .required("Data do episódio é obrigatória")
@@ -42,23 +43,16 @@ export const updateFilmeById = async (req: Request, res: Response) => {
 
 
     if(Object.keys(req.body).length === 0){
-        return res.status(422).json({ 
-            error : {
-                default: "O body nao pode estar vazio"
-            }});
+        return res.status(422).json({error: true, message: "O body nao pode estar vazio"});
     }
     
     const result = await updateFilmeByIdProvider(req.params.id, req.body);
 
     if(result instanceof Error){
-        return res.status(500).json({
-            error : {
-                default: result.message
-            }
-        });
+        return res.status(500).json({error: true, message: result.message});
     }
 
-    return res.status(204).send();
+    return res.status(200).json({error: false, result: result});
 };
 
 
