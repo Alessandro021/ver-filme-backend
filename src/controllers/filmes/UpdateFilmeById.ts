@@ -12,7 +12,7 @@ interface IIdFilmesProps {
 
 const validarFilmeBody: yup.ObjectSchema<Partial<IFilmeProps>> = yup.object().shape({
     categoria: yup.array().of(yup.string().min(3).required().nonNullable()).optional(),
-    titulo: yup.string().nonNullable().min(5).optional(),
+    titulo: yup.string().nonNullable().min(2).optional(),
     genero: yup.array().of(yup.string().min(3).nonNullable().required()).nonNullable().optional(),
     descricao: yup.string().nonNullable().optional(),
     popularidade: yup.number().default(0).nonNullable().optional(),

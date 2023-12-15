@@ -10,7 +10,7 @@ interface IFimesProps extends Omit<IFimes, "id">{}
 const validarFilmesProps: yup.ObjectSchema<IFimesProps> = yup.object().shape({
     duracao: yup.number().default(0).nonNullable().optional(),
     categoria: yup.array().of(yup.string().min(3).required().nonNullable()).required(),
-    titulo: yup.string().required().nonNullable().min(5),
+    titulo: yup.string().required().nonNullable().min(2),
     genero: yup.array().of(yup.string().min(3).required().nonNullable()).required(),
     descricao: yup.string().required(),
     popularidade: yup.number().default(0).nonNullable().optional(),
