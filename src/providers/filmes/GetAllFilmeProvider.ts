@@ -18,6 +18,11 @@ export const getAllFilmesProvider = async (pagina: number, limite: number, filtr
                             has: filtrar,
                             
                         }
+                    },
+                    {
+                        genero: {
+                            has: filtrar,
+                        }
                     }
                 ]
             },
