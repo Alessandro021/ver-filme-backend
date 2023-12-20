@@ -16,7 +16,7 @@ import { validarReqGetUsuarioById, getUsuarioById } from "./controllers/usuarios
 export const router = Router();
 
 //Rota de Test
-router.get("/", (req, res) => {return res.status(422).send("Server funcionando");});
+router.head("/", (req, res) => {return res.status(200).send("Server funcionando");});
 
 
 /*ROTA DE FILME*/
