@@ -15,3 +15,25 @@ export interface IFimes {
     voto_medio?: number;
     duracao?: number
  }
+
+export const ArrayGeneros = [
+    "ação", 
+    "aventura", 
+    "animação", 
+    "comédia", 
+    "crime",
+    "documentário",
+    "drama",
+    "família",
+    "fantasia", 
+    "história",
+    "terror", 
+    "música",
+    "mistério",
+    "romance",
+    "ficção científica",
+    "nacional",
+    "suspense",
+    "guerra",
+    "faroeste"
+];

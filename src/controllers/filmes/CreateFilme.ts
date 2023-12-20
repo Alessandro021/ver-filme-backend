@@ -1,17 +1,17 @@
 import { NextFunction, Request, Response } from "express";
 import * as yup from "yup";
-import { IFimes } from "../../database/models/Filmes";
+import { ArrayGeneros, IFimes } from "../../database/models/Filmes";
 import {createFilmeProvider} from "../../providers/filmes/CreateFilmeProvider";
 import { validacao } from "../../middleware/Validacao";
 
 interface IFimesProps extends Omit<IFimes, "id">{}
-  
+ 
   
 const validarFilmesProps: yup.ObjectSchema<IFimesProps> = yup.object().shape({
     duracao: yup.number().default(0).nonNullable().optional(),
     categoria: yup.array().of(yup.string().min(3).required().nonNullable()).required(),
     titulo: yup.string().required().nonNullable().min(2),
-    genero: yup.array().of(yup.string().min(3).required().nonNullable()).required(),
+    genero: yup.array().of(yup.string().oneOf(ArrayGeneros).required().nonNullable()).required(),
     descricao: yup.string().required(),
     popularidade: yup.number().default(0).nonNullable().optional(),
     poster: yup.string().required().nonNullable(),
