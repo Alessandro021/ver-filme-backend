@@ -11,6 +11,14 @@ export const createFilmeProvider = async (filme: IFimes ): Promise<IFimes | Erro
     }
 
     try {
+        const filmeExist = await prisma.filme.findFirst({
+            where: {file: filme.file}
+        });
+
+        if(filmeExist){
+            return Error(`O filme ${filme.titulo}, já esta cadastrado!`);
+        }
+        
         const data = await prisma.filme.create({
             data: filme ,
             select: { 
