@@ -10,7 +10,7 @@ interface IQueryProps {
 }
 
 const validarFilmeParms: yup.ObjectSchema<IQueryProps> = yup.object().shape({
-    filtrar: yup.string().optional().min(2),
+    filtrar: yup.string().optional(),
     pagina: yup.number().optional().moreThan(0),
     limite: yup.number().optional().moreThan(0),
 });
