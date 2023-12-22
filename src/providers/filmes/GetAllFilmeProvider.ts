@@ -75,7 +75,7 @@ export const getAllFilmesProvider = async (pagina: number, limite: number, filtr
         const proximaPagina = ((pagina - 1) * limite + filmes.length) < totalFilmes;
 
         if(filmes){
-            return {filmes, count: filmes.length, proximaPagina: proximaPagina};
+            return {filmes, count: totalFilmes, proximaPagina: proximaPagina};
         } else {
             return Error("Houve um erro ao buscar lista de filmes");
         }
