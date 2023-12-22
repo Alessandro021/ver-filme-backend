@@ -1,7 +1,7 @@
 import { IFimes } from "../../database/models/Filmes";
 import { prisma } from "../../database/prisma";
 
-export const getAllFilmesProvider = async (pagina: number, limite: number, filtrar: string): Promise<{filmes: IFimes[], count: number} | Error> => {
+export const getAllFilmesProvider = async (pagina: number, limite: number, filtrar: string): Promise<{filmes: IFimes[], count: number, proximaPagina: boolean} | Error> => {
     try {
         const filmes = await prisma.filme.findMany({
 
@@ -49,8 +49,33 @@ export const getAllFilmesProvider = async (pagina: number, limite: number, filtr
             }
         });
 
+        const totalFilmes = await prisma.filme.count({
+            where: {
+                OR: [
+                    {
+                        titulo: {
+                            contains: filtrar,
+                            mode: "insensitive"
+                        }
+                    },
+                    {
+                        categoria: {
+                            has: filtrar,
+                        }
+                    },
+                    {
+                        genero: {
+                            has: filtrar,
+                        }
+                    }
+                ]
+            }
+        });
+
+        const proximaPagina = ((pagina - 1) * limite + filmes.length) < totalFilmes;
+
         if(filmes){
-            return {filmes, count: filmes.length};
+            return {filmes, count: filmes.length, proximaPagina: proximaPagina};
         } else {
             return Error("Houve um erro ao buscar lista de filmes");
         }
