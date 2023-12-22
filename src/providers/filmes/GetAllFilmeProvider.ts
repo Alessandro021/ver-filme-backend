@@ -1,9 +1,9 @@
 import { IFimes } from "../../database/models/Filmes";
 import { prisma } from "../../database/prisma";
 
-export const getAllFilmesProvider = async (pagina: number, limite: number, filtrar: string): Promise<IFimes[] | Error> => {
+export const getAllFilmesProvider = async (pagina: number, limite: number, filtrar: string): Promise<{filmes: IFimes[], count: number} | Error> => {
     try {
-        const allFilmes = await prisma.filme.findMany({
+        const filmes = await prisma.filme.findMany({
 
             where: {
                 OR: [
@@ -49,8 +49,8 @@ export const getAllFilmesProvider = async (pagina: number, limite: number, filtr
             }
         });
 
-        if(allFilmes){
-            return allFilmes;
+        if(filmes){
+            return {filmes, count: filmes.length};
         } else {
             return Error("Houve um erro ao buscar lista de filmes");
         }

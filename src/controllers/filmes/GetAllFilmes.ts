@@ -26,5 +26,5 @@ export const getAllFilmes = async ( req: Request<{},{},{},IQueryProps>, res: Res
         return res.status(500).json({error: true, message: result.message });
     }
 
-    return res.status(200).json({error: false, result: result});
+    return res.status(200).json({error: false, count: result.count, result: result.filmes});
 };
